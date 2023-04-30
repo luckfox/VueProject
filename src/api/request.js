@@ -19,12 +19,12 @@ requests.interceptors.request.use((config)=>{
 //設置response的success Callback和error Callback
 requests.interceptors.response.use(
     (success)=>{
-    nprogress.stop();
-    console.log(success.data);
+    nprogress.done();
+    console.log('SUCCESS!',success.data);
     return success.data;
 },
     (error)=>{
-    console.log(error);
+    console.log('ERROR!',error);
     return Promise.reject(new Error('fail'));
 });
 export default requests;

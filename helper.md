@@ -9,5 +9,8 @@
   * 建置`reqCategoryList`代碼
 * 基本`Vuex`的`store`建置，並且切割成小`store`
 
+#### 1.01
 
+* 建立`/home`下的小倉庫
+* 實際使用二次包裝後的request去讀取後台資料，並顯示在頁面上
 

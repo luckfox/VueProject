@@ -1,5 +1,6 @@
 <template>
   <div class="type-nav">
+    <h1>{{categoryList}}</h1>
     <div class="container">
       <h2 class="all">全部商品分类</h2>
       <nav class="nav">
@@ -1691,9 +1692,28 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name:'TypeNav',
+  mounted() {
+    this.$store.dispatch('categoryList');
+  },
+  computed:{
+    ...mapState({
+      //裡面所傳入的state，便是指$store.state
+      //因此以下意思為，當$store.state發生變化，那麼就執行以下函數運算，傳入值為$store.state，
+      //因此我可以透過以下方式，將$store.state.home.categoryList映射到本地端的categoryList
+      //另外mapState裡面的屬性值無需要在data在定義。
+      //以下可以在簡寫為 categoryList:state=>state.home.categoryList;
+
+      categoryList:(state)=>{
+        console.log(state);
+        return state.home.categoryList;
+      }
+
+    })
+  }
 }
 </script>
 <style scoped lang="less">
