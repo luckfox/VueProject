@@ -1,3 +1,27 @@
+#### start
+
+* 由本地推送到遠端倉庫
+
+````
+git remote add origin https://github.com/luckfox/VueProject.git
+git push origin main
+````
+
+* 由遠端拉回本地倉庫
+
+
+````
+git remote add origin https://github.com/luckfox/VueProject.git
+git pull origin main
+````
+
+如果本地端為一個空倉庫(`node_modules`不存在)，則執行
+
+````
+npm install
+````
+
+
 #### 1.00  
 
 * `axios`二次封裝，在`/api/request.js`對`axios`進行二次封裝，可以在這個封裝項目內進行更完整的設置，例如攔截器設置。
@@ -14,3 +38,34 @@
 * 建立`/home`下的小倉庫
 * 實際使用二次包裝後的request去讀取後台資料，並顯示在頁面上
 
+#### 1.0.2
+
+* 完成三級分類選項
+
+* 添加一級分類顏色光棒
+
+   * 以`style`方式添加`hover`事件
+
+     ````
+     .item:hover{
+     	background:skyblue;
+     }
+     ````
+
+     
+
+   * 以`@mouseenter`帶值傳入`changeIndex(index)`，之後以`data.currentIndex`方式存儲起來，同時在一級選項中，判斷目前`data.currentIndex`==`index`，如果成立，則產生一個`class="focus"`，如此在`style`內判斷如果有`class="foucs"`則設定`background:skyblue`。
+
+* 二三級分類隱藏和顯示
+
+  * 以`style`方式添加`hover`事件
+
+    ````
+    &:hover{
+    	.item-list{
+    		display:block;
+    	}
+    }
+    ````
+
+    
