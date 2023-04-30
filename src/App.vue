@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<!--    <img alt="Vue logo" src="./assets/logo.png">-->
+<!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <HeaderSection/>
+    <router-view></router-view>
+    <footerSection/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HeaderSection from './components/Header/index.vue'
+import FooterSection from './components/Footer'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // eslint-disable-next-line vue/no-unused-components
+    HeaderSection,
+    FooterSection
   }
 }
 </script>
