@@ -14,20 +14,37 @@
         <a href="###">秒杀</a>
       </nav>
       <div class="sort">
-        <div class="all-sort-list2">
+<!--        利用事件委派+編程式導航實現路由器跳轉以及傳遞參數-->
+<!--        將事件回調函數，置放在所有的節點的上層，並且將想要傳遞的參數，以Data方式儲存，
+            在函數中，內定的event參數，判斷是從何而來
+            便可達到效果-->
+        <div class="all-sort-list2" @click="handleClick">
           <div class="item" v-for="(c1,index) in categoryList" :key="c1.categoryId" :class="{focus:currentIndex==index}">
             <h3 @mouseenter="changeIndex(index)" @mouseleave="resetIndex">
-              <a href="">{{c1.categoryName}}</a>
+
+<!--              在多層for迴圈中，如果使用靜態的router-link，將會使系統產生多個組件，造成囤積大量的內存，嚴重影響效能-->
+<!--                  因此要以編程式導航來取代-->
+<!--              <a  @click="handleClick(index)">{{c1.categoryName}}</a>-->
+<!--                  <router-link :to="'/Search/'+index">{{c1.categoryName}}</router-link>-->
+
+                  <a :data-categoryName="c1.categoryName" :data-categoryId="c1.categoryId">{{c1.categoryName}}</a>
+
             </h3>
             <div class="item-list clearfix" :style="{display:currentIndex==index?'block':'none'}">
               <div class="subitem" v-for="(c2) in c1.categoryChild" :key="c2.categoryId">
                 <dl class="fore">
                   <dt>
-                    <a href="">{{ c2.categoryName }}</a>
+<!--                    <a href="">{{ c2.categoryName }}</a>-->
+<!--                    <router-link to="/Search">{{c2.categoryName}}</router-link>-->
+                        <a :data-categoryName="c2.categoryName" :data-categoryId="c2.categoryId">{{c2.categoryName}}</a>
+
                   </dt>
                   <dd>
                     <em v-for="(c3) in c2.categoryChild" :key="c3.categoryId">
-                      <a href="">{{c3.categoryName}}</a>
+<!--                      <a href="">{{c3.categoryName}}</a>-->
+<!--                      <router-link to="/Search">{{c3.categoryName}}</router-link>-->
+                          <a :data-categoryName="c3.categoryName" :data-categoryId="c3.categoryId">{{c3.categoryName}}</a>
+
                     </em>
                   </dd>
                 </dl>
@@ -41,6 +58,11 @@
 </template>
 <script>
 import {mapState} from 'vuex'
+//完全引入，浪費較多資源
+// import _ from 'lodash'
+//根據需要部份引入
+import {throttle} from "lodash";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name:'TypeNav',
@@ -53,13 +75,43 @@ export default {
     this.$store.dispatch('categoryList');
   },
   methods:{
+    handleClick(event){
+      let element=event.target;
+      //獲取自定義屬性
+      console.log(element);
+      let {categoryname,category1id,category2id,category3id}=element.dataset;
+      if(categoryname)
+      {
+        let location={name:'Search'}
+        let query={categoryName:categoryname}
+        if(category1id){
+          query.category1Id=category1id;
+        }else if(category2id){
+          query.category2Id=category2id;
+        }else
+        {
+          query.category3Id=category3id;
+        }
+          location.query=query;
+          this.$router.push(location);
+      }
+
+    },
+    c1click(index){
+      console.log('c1 click item='+index)
+      this.$router.push("/Search/"+index+"?k="+index)
+    },
     resetIndex(){
       this.currentIndex=-1;
     },
-    changeIndex(index){
+    // changeIndex(index){
+    //   this.currentIndex=index;
+    // },
+    //以lodash的節流方式處理，此處的callback如果用=>函數可能會有this上的問題
+    changeIndex:_.throttle(function (index){
       this.currentIndex=index;
-      //alert(index);
-    }
+    })
+
   },
   computed:{
     ...mapState({

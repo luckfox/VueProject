@@ -83,3 +83,21 @@ npm install
 * 節流處理：在某個時間間隔內，已經發生的事件將在此間隔不再觸發，只有當大於此間隔才會再次觸發，因而解省大量系統資源。
   * 使用`lodash`，https://www.lodashjs.com/
   * 範例：`/src/assets/resource/custom/test2.html`
+
+1.04 
+
+ * 以節流方式改寫第一級連動
+
+   ````
+       // changeIndex(index){
+       //   this.currentIndex=index;
+       // },
+       //以lodash的節流方式處理，此處的callback如果用=>函數可能會有this上的問題
+       changeIndex:_.throttle(function (index){
+         this.currentIndex=index;
+       })
+   ````
+
+ * 以更有效率的方式完成多級迴圈的路由跳轉
+
+   <尚未完成>
