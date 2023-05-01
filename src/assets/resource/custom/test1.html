@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/lodash.min.js"></script>
+</head>
+<body>
+    <p>
+        請輸入搜索內容：<input type="text">
+    </p>
+</body>
+</html>
+<script>
+    let input =document.querySelector('input');
+    input.oninput=_.debounce(function (){
+        console.log('1000 ms would be trigger!')
+    },1000);
+    // lodash 插件：裡面封裝函數的防抖動與節流的業務
+    //
+    // console.log(_);
+    // let result=_.debounce(function (){
+    //     console.log('1000 ms would be trigger!')
+    // },1000);
+    // result();
+</script>

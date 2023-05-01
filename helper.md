@@ -38,7 +38,7 @@ npm install
 * 建立`/home`下的小倉庫
 * 實際使用二次包裝後的request去讀取後台資料，並顯示在頁面上
 
-#### 1.0.2
+#### 1.02
 
 * 完成三級分類選項
 
@@ -68,4 +68,18 @@ npm install
     }
     ````
 
-    
+  * 一樣是採用`data.currentIndex==index`的做法
+
+    ````
+     <div class="item-list clearfix" :style="{display:currentIndex==index?'block':'none'}">
+    ````
+
+#### 1.03
+
+ * 防抖動處理：在某些情景下，例如滑鼠經過一連串的表列選單，因而引發一連串的表列選單事件被觸發，然而瀏覽器又來不及處理，因而造成所謂的抖動現象，如果要解決就得要用延遲觸發，比如說滑鼠停留在某個表單上`100ms`後才會被觸發。也就是前面的事件都將被取消，只有再停留時間超過一定時間，此事件才會被觸發。
+   * 使用`lodash`，https://www.lodashjs.com/
+   * 範例：`/src/assets/resource/custom/test1.html`
+
+* 節流處理：在某個時間間隔內，已經發生的事件將在此間隔不再觸發，只有當大於此間隔才會再次觸發，因而解省大量系統資源。
+  * 使用`lodash`，https://www.lodashjs.com/
+  * 範例：`/src/assets/resource/custom/test2.html`

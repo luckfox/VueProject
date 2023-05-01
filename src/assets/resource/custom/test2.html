@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./js/lodash.min.js"></script>
+</head>
+<body>
+    <div>
+        <h1>我是計數器<span>0</span></h1>
+        <button>點擊我+1</button>
+    </div>
+
+</body>
+<script>
+    let span = document.querySelector('span');
+    let button= document.querySelector('button');
+    let count=0;
+    // button.onclick=function (){
+    //     count++;
+    //     span.innerHTML=count;
+    // }
+
+    button.onclick=_.throttle(function(){
+        count++;
+        span.innerHTML=count;
+    },1000);
+
+</script>
+</html>
