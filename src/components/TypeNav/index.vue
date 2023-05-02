@@ -15,8 +15,8 @@
       </nav>
       <div class="sort">
 <!--        利用事件委派+編程式導航實現路由器跳轉以及傳遞參數-->
-<!--        將事件回調函數，置放在所有的節點的上層，並且將想要傳遞的參數，以Data方式儲存，
-            在函數中，內定的event參數，判斷是從何而來
+<!--        將事件回調函數，置放在所有的節點的上層，並且將想要傳遞的參數，以自訂屬性的方式儲存，
+            稍後在回調函數中，由內定的event參數取得觸發的元素(event.target)，判斷是從何而來,以及所夾帶的資料
             便可達到效果-->
         <div class="all-sort-list2" @click="handleClick">
           <div class="item" v-for="(c1,index) in categoryList" :key="c1.categoryId" :class="{focus:currentIndex==index}">
@@ -59,9 +59,9 @@
 <script>
 import {mapState} from 'vuex'
 //完全引入，浪費較多資源
-// import _ from 'lodash'
+import _ from 'lodash'
 //根據需要部份引入
-import {throttle} from "lodash";
+// import {throttle} from "lodash";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -79,6 +79,7 @@ export default {
       let element=event.target;
       //獲取自定義屬性
       console.log(element);
+      // 對象解構賦值的語法，亦即從element.dataset內的屬性名稱對應到'categoryname','category1id','category2id,'category3id'並且賦值。
       let {categoryname,category1id,category2id,category3id}=element.dataset;
       if(categoryname)
       {
@@ -88,8 +89,7 @@ export default {
           query.category1Id=category1id;
         }else if(category2id){
           query.category2Id=category2id;
-        }else
-        {
+        }else {
           query.category3Id=category3id;
         }
           location.query=query;
