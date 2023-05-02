@@ -1,11 +1,6 @@
 <template>
   <div>
-    我是Search
-    <h1>params={{keyword}}</h1>
-    <h1>params={{$route.params.keyword}}</h1>
-    <h1>query={{k}}</h1>
-    <h1>route={{this.$route.query.k}}</h1>
-    <h1>route={{$route.query.k}}</h1>
+    <typeNav/>
   </div>
 </template>
 

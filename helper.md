@@ -84,7 +84,7 @@ npm install
   * 使用`lodash`，https://www.lodashjs.com/
   * 範例：`/src/assets/resource/custom/test2.html`
 
-1.04 
+#### 1.04 
 
  * 以節流方式改寫第一級連動
 

@@ -11,6 +11,7 @@ const router =new VueRouter({
     //路由路徑配置，並且需要引入組件
     routes: [
         {
+            name:"Home",
             path:"/Home",
             component:Home
         },
