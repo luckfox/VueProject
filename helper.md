@@ -101,3 +101,24 @@ npm install
  * 以更有效率的方式完成多級迴圈的路由跳轉
 
    <尚未完成>
+
+#### 1.05 
+
+* 以滑鼠移動事件來控制標單是否隱藏出現。
+* 過場動畫。
+
+#### 1.06
+
+* `typeNav`商品清單優化：在`home`(`Home\index.vue`)和`search`各別存在`typeNav`組件，亦即在兩個`home`和`search`頁面切換時，typeNav分別被銷毀又重建一次，也就是categoryList會被呼叫多次，造成資源的浪費。因此，將typeNav的以下程序移植到`App`組件
+
+````
+  mounted() {
+    this.$store.dispatch('categoryList');
+    if(this.$route.name!='Home') this.show=false;
+  },
+````
+
+* 合併參數：目前在`TypeNav`(`TypeNav\index.vue`)以及`Header`(`Header\index.vue`)各有對`search`進行操作，使得在做搜璇時，既能根據清單層次去搜尋也兼顧到搜尋的關鍵字。
+
+
+

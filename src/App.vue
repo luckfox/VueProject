@@ -17,6 +17,9 @@ export default {
     // eslint-disable-next-line vue/no-unused-components
     HeaderSection,
     FooterSection
+  },
+  mounted() {
+    this.$store.dispatch('categoryList');
   }
 }
 </script>

@@ -18,7 +18,7 @@
                   <!--              <a  @click="handleClick(index)">{{c1.categoryName}}</a>-->
                   <!--                  <router-link :to="'/Search/'+index">{{c1.categoryName}}</router-link>-->
 
-                  <a :data-categoryName="c1.categoryName" :data-categoryId="c1.categoryId">{{c1.categoryName}}</a>
+                  <a :data-categoryname="c1.categoryName" :data-category1id="c1.categoryId">{{c1.categoryName}}</a>
 
                 </h3>
                 <div class="item-list clearfix" :style="{display:currentIndex==index?'block':'none'}">
@@ -27,14 +27,14 @@
                       <dt>
                         <!--                    <a href="">{{ c2.categoryName }}</a>-->
                         <!--                    <router-link to="/Search">{{c2.categoryName}}</router-link>-->
-                        <a :data-categoryName="c2.categoryName" :data-categoryId="c2.categoryId">{{c2.categoryName}}</a>
+                        <a :data-categoryname="c2.categoryName" :data-category2id="c2.categoryId">{{c2.categoryName}}</a>
 
                       </dt>
                       <dd>
                         <em v-for="(c3) in c2.categoryChild" :key="c3.categoryId">
                           <!--                      <a href="">{{c3.categoryName}}</a>-->
                           <!--                      <router-link to="/Search">{{c3.categoryName}}</router-link>-->
-                          <a :data-categoryName="c3.categoryName" :data-categoryId="c3.categoryId">{{c3.categoryName}}</a>
+                          <a :data-categoryname="c3.categoryName" :data-category3id="c3.categoryId">{{c3.categoryName}}</a>
 
                         </em>
                       </dd>
@@ -78,7 +78,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('categoryList');
+
     // 當組件掛載完畢，讓show屬性變為false
     // 如果不是Home路由組件，將本組件隱藏
     if(this.$route.name!='Home') this.show=false;
@@ -87,9 +87,10 @@ export default {
     handleClick(event){
       let element=event.target;
       //獲取自定義屬性
-      console.log(element);
+      console.log('**',element.dataset);
       // 對象解構賦值的語法，亦即從element.dataset內的屬性名稱對應到'categoryname','category1id','category2id,'category3id'並且賦值。
       let {categoryname,category1id,category2id,category3id}=element.dataset;
+      console.log('^^^',categoryname)
       if(categoryname)
       {
         let location={name:'Search'}
@@ -101,6 +102,8 @@ export default {
         }else {
           query.category3Id=category3id;
         }
+        if(this.$router.params) location.params=this.$router.params;
+
           location.query=query;
           this.$router.push(location);
       }

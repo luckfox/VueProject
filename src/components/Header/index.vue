@@ -56,15 +56,14 @@ export default {
   methods:
       {
         goSearch(){
-          console.log('goSearch');
-          // this.$router.push({name:'Search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
-          // 以下皆為等價寫法
-          // this.$router.push("/Search/"+this.keyword+"?k="+this.keyword.toUpperCase())
-          this.$router.push({name:'Search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}},(complete)=>{console.log('###',complete)},(abort)=>{console.log('@@@',abort)})
-          // 以下為錯誤寫法，path不能和params共存
-          // this.$router.push({path:'/Search',params:{keyword:this.keyword},query:{k:this.keyword.toUpperCase()}})
-        }
+          let location={  name:'Search',
+                          params:{keyword:this.keyword || undefined}};
 
+          if(this.$route.query) location.query=this.$route.query;
+          console.log('goSearch');
+
+          this.$router.push(location);
+        }
       }
 }
 </script>
