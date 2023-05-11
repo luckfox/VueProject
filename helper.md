@@ -120,5 +120,7 @@ npm install
 
 * 合併參數：目前在`TypeNav`(`TypeNav\index.vue`)以及`Header`(`Header\index.vue`)各有對`search`進行操作，使得在做搜璇時，既能根據清單層次去搜尋也兼顧到搜尋的關鍵字。
 
+#### 1.07
 
+* 使用mockjs進行數據模擬。詳細作法寫在1.08
 
